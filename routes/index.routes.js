@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     return res.status(200).render("index", { title: "Backend Shopeame" });
-    //.send("API Shopeame");
+    //.send("API MyShop");
 });
 
 module.exports = router;

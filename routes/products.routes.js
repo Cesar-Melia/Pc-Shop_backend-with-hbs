@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
     try {
         const products = await Product.find();
-        return res.status(200).json(products);
+        return res.status(200).render("products", { products });
     } catch (error) {
         return next(error);
     }
@@ -14,9 +14,10 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById({ id });
-        return next(error);
-    } catch {
+        const product = await Product.findById(id);
+
+        return res.status(200).render("product", { product });
+    } catch (error) {
         return next(error);
     }
 });

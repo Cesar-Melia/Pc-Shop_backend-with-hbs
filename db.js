@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const DB_URL = "mongodb://localhost:27017/shopeame-api";
+const DB_URL = "mongodb://localhost:27017/myshop-api";
 
 const connect = async () => {
     try {

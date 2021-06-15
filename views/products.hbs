@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <h1> Todos los productos</h1>
+
+    <h3><a href="/">Inicio</a></h3>
+
+    <ul>
+        {{#each products}}
+        <li>
+            <h4>
+                <a href="/products/{{_id}}">
+                    Name: {{name}}
+                </a> 
+            </h4>
+            <h4>Price: {{price}}</h4>
+            <h4>Description: {{description}}</h4>
+            <h4>Stars: {{stars}}</h4>
+            <h4>Image: {{image}}</h4>
+
+        {{#gte stars 4}}
+            This product has 4 stars or more.
+        {{/gte}}
+
+        </li>
+        <hr>
+        {{/each}}
+    </ul>
+</body>
+</html>

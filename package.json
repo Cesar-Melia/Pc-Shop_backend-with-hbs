@@ -1,5 +1,5 @@
 {
-  "name": "back-shopeame",
+  "name": "myshop-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,9 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "hbs": "^4.1.2",
     "mongoose": "^5.12.13",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }
