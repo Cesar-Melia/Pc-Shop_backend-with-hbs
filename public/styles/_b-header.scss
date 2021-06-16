@@ -1,0 +1,21 @@
+.b-header {
+    margin-bottom: 70px;
+    background-color: var(--color-light-blue);
+    width: 100%;
+    border-bottom: 2px solid;
+
+    &__nav {
+        max-width: 1200px;
+    }
+
+    &__link {
+        margin: 0 30px;
+        font-size: 24px;
+        text-decoration: none;
+        color: var(--color-text);
+
+        &:hover {
+            color: var(--color-text-active);
+        }
+    }
+}

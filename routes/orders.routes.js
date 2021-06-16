@@ -5,10 +5,9 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
     try {
-        ////////////////////////////////////// .populate(users) no funciona!!!!!
         const orders = await Order.find().populate("users").populate("products");
 
-        return res.status(200).json(orders);
+        return res.status(200).render("orders", { orders });
     } catch (error) {
         return next(error);
     }

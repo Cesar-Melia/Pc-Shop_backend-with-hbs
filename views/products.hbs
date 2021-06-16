@@ -1,36 +1,52 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-</head>
-<body>
-    <h1> Todos los productos</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles/main.css" />
 
-    <h3><a href="/">Inicio</a></h3>
+        <title>Products</title>
+    </head>
+    <body>
+        <header class="b-header d-flex justify-content-center">
+            <nav class="b-header__nav d-flex justify-content-between">
+                <h3><a class="b-header__link" href="/">Inicio</a></h3>
+                <h3><a class="b-header__link" href="/products">Productos</a></h3>
+                <h3><a class="b-header__link" href="/orders">Pedidos</a></h3>
+                <h3><a class="b-header__link" href="/users">Usuarios</a></h3>
+                <h3><a class="b-header__link" href="/auth/register">Registro</a></h3>
+            </nav>
+        </header>
+        <main class="b-main">
+            <h1 class="b-text__title"> Todos los productos</h1>
+            <ul>
+                {{#each products}}
+                    <li>
+                        <h4>
+                            <a href="/products/{{_id}}">
+                                Name:
+                                {{name}}
+                            </a>
+                        </h4>
+                        <h4>Precio: {{price}}</h4>
+                        <h4>Descripción: {{description}}</h4>
+                        <h4>Tipo: {{type}}</h4>
+                        <h4>Procesador: {{processor}}</h4>
+                        <h4>Memoria RAM: {{memory}}</h4>
+                        <h4>GPU: {{gpu}}</h4>
+                        <h4>SSD: {{ssd}}</h4>
+                        <h4>HDD: {{hdd}}</h4>
+                        <h4>Estrellas: {{stars}}</h4>
+                        <h4>Imagen: {{image}}</h4>
 
-    <ul>
-        {{#each products}}
-        <li>
-            <h4>
-                <a href="/products/{{_id}}">
-                    Name: {{name}}
-                </a> 
-            </h4>
-            <h4>Price: {{price}}</h4>
-            <h4>Description: {{description}}</h4>
-            <h4>Stars: {{stars}}</h4>
-            <h4>Image: {{image}}</h4>
+                        {{#gte stars 4}}
+                            Este producto tiene 4 estrellas o más.
+                        {{/gte}}
 
-        {{#gte stars 4}}
-            This product has 4 stars or more.
-        {{/gte}}
-
-        </li>
-        <hr>
-        {{/each}}
-    </ul>
-</body>
+                    </li>
+                    <hr />
+                {{/each}}
+            </ul>
+        </main>
+    </body>
 </html>

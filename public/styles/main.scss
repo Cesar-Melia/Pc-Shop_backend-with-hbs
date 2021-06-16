@@ -1,0 +1,17 @@
+//SETINGS
+@import "./colors";
+
+//GENERIC
+@import "./normalize.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+
+//ELEMENTS
+@import "./body";
+
+//BLOLCKS
+@import "./b-text";
+@import "./b-header";
+@import "./b-home";
+@import "./b-main";
+
+//UTILITIES

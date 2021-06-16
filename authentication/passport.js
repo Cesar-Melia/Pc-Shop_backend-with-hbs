@@ -7,7 +7,7 @@ const isValidEmail = (email) => {
     const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    return re.test(String(email).toLowercase());
+    return re.test(String(email).toLowerCase());
 };
 
 const isValidPassword = (password) => {
@@ -37,7 +37,7 @@ const registerStrategy = new LocalStrategy(
                 return done(error, null);
             }
 
-            if (!isValidPasswordl(password)) {
+            if (!isValidPassword(password)) {
                 const error = new Error("Contraseña no válida");
                 return done(error, null);
             }
@@ -66,4 +66,4 @@ const registerStrategy = new LocalStrategy(
     }
 );
 
-passport.use("registro", registerStrategy);
+passport.use("register", registerStrategy);

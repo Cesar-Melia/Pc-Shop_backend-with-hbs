@@ -1,26 +1,41 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
-</head>
-<body>
-    <h3><a href="/products">Volver</a></h3>
-    <h3><a href="/">Inicio</a></h3>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles/main.css" />
 
-    {{#if product}}
-        <h1>Name: {{product.name}}</h1>
-        <h4>Price: {{product.price}}</h4>
-        <h4>Description: {{product.description}}</h4>
-        <h4>Stars: {{product.stars}}</h4>
-        <h4>Image: {{product.image}}</h4>
+        <title>Product</title>
+    </head>
+    <body>
+        <main class="b-main">
 
+            <header class="b-header d-flex justify-content-center">
+                <nav class="b-header__nav d-flex justify-content-between">
+                    <h3><a href="/">Inicio</a></h3>
+                    <h3><a href="/products">Productos</a></h3>
+                    <h3><a href="/orders">Pedidos</a></h3>
+                    <h3><a href="/users">Usuarios</a></h3>
+                    <h3><a href="/auth/register">Registro</a></h3>
+                </nav>
+            </header>
 
+            {{#if product}}
+                <h1>Name: {{product.name}}</h1>
+                <h4>Price: {{product.price}}</h4>
+                <h4>Description: {{product.description}}</h4>
+                <h4>Tipo: {{type}}</h4>
+                <h4>Procesador: {{processor}}</h4>
+                <h4>Memoria RAM: {{memory}}</h4>
+                <h4>GPU: {{gpu}}</h4>
+                <h4>SSD: {{ssd}}</h4>
+                <h4>HDD: {{hdd}}</h4>
+                <h4>Stars: {{product.stars}}</h4>
+                <h4>Image: {{product.image}}</h4>
 
-    {{else}}
-        No existe
-    {{/if}}
-</body>
+            {{else}}
+                No existe
+            {{/if}}
+        </main>
+    </body>
 </html>

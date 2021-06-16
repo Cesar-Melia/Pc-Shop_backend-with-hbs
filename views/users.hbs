@@ -4,7 +4,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles/main.css" />
-        <title>Error</title>
+
+        <title>Users</title>
     </head>
     <body>
         <header class="b-header d-flex justify-content-center">
@@ -17,10 +18,29 @@
             </nav>
         </header>
         <main class="b-main">
-            <h1 class="b-text__title">Error: {{status}}</h1>
+            <h1 class="b-text__title"> Usuarios</h1>
+            <ul>
+                {{#each users}}
+                    <li>
+                        <h4>
+                            <a href="/users/{{_id}}">
+                                ID:
+                                {{_id}}
+                            </a>
+                        </h4>
+                        <h4>Email: {{email}}</h4>
+                        <h4>Contraseña: {{password}}</h4>
+                        <h4>Nombre: {{name}}</h4>
+                        <h4>Apellidos: {{lastName}}</h4>
+                        <h4>Dirección: {{adress}}</h4>
+                        <h4>País: {{country}}</h4>
+                        <h4>Ciudad: {{city}}</h4>
+                        <h4>Pedidos: {{orders}}</h4>
 
-            <h4>{{message}}</h4>
+                    </li>
+                    <hr />
+                {{/each}}
+            </ul>
         </main>
-
     </body>
 </html>

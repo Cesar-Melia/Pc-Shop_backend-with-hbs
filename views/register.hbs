@@ -1,0 +1,63 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles/main.css" />
+
+        <title>Register</title>
+    </head>
+    <body>
+        <header class="b-header d-flex justify-content-center">
+            <nav class="b-header__nav d-flex justify-content-between">
+                <h3><a class="b-header__link" href="/">Inicio</a></h3>
+                <h3><a class="b-header__link" href="/products">Productos</a></h3>
+                <h3><a class="b-header__link" href="/orders">Pedidos</a></h3>
+                <h3><a class="b-header__link" href="/users">Usuarios</a></h3>
+                <h3><a class="b-header__link" href="/auth/register">Registro</a></h3>
+            </nav>
+        </header>
+        <main class="b-main">
+
+            <h1 class="b-text__title">Registro</h1>
+
+            <form action="/auth/register" method="POST">
+
+                <div>
+                    <label>Nombre</label>
+                    <input name="name" type="text" required placeholder="Nombre" />
+                </div>
+
+                <div>
+                    <label>Apellidos</label>
+                    <input name="lastName" type="text" required placeholder="lastName" />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input name="email" type="email" required placeholder="Email" />
+                </div>
+                <div>
+                    <label>Contraseña</label>
+                    <input name="password" type="password" required placeholder="Password" />
+                </div>
+                <div>
+                    <label>Dirección</label>
+                    <input name="adress" type="text" required placeholder="Dirección" />
+                </div>
+
+                <div>
+                    <label>País</label>
+                    <input name="country" type="text" required placeholder="País" />
+                </div>
+                <div>
+                    <label>Ciudad</label>
+                    <input name="city" type="text" required placeholder="Ciudad" />
+                </div>
+
+                <div>
+                    <button type="submit">Registrarme</button>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>

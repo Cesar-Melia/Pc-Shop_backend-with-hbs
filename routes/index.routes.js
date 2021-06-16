@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    return res.status(200).render("index", { title: "Backend Shopeame" });
-    //.send("API MyShop");
+    return res.status(200).render("index", { title: "API Pc Shop" });
+    //.send("API Pc Shop");
 });
 
 module.exports = router;

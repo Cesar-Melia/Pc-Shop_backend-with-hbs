@@ -24,8 +24,21 @@ router.get("/:id", async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
     try {
-        const { name, price, description, stars, image } = req.body;
-        const newProduct = new Product({ name, price, description, stars, image });
+        const { name, price, description, type, processor, memory, gpu, ssd, hdd, stars, image } =
+            req.body;
+        const newProduct = new Product({
+            name,
+            price,
+            description,
+            type,
+            processor,
+            memory,
+            gpu,
+            ssd,
+            hdd,
+            stars,
+            image,
+        });
 
         const createProduct = await newProduct.save();
         return res.status(201).json(createProduct);
@@ -37,12 +50,31 @@ router.post("/create", async (req, res, next) => {
 router.put("/edit", async (req, res, next) => {
     console.log("Endpoint EDIT");
     try {
-        const { _id, name, price, description, stars, image } = req.body;
+        const {
+            _id,
+            name,
+            price,
+            description,
+            type,
+            processor,
+            memory,
+            gpu,
+            ssd,
+            hdd,
+            stars,
+            image,
+        } = req.body;
 
         const fieldsToUpdate = {};
         if (name) fieldsToUpdate.name = name;
         if (price) fieldsToUpdate.price = Number(price);
         if (description) fieldsToUpdate.description = description;
+        if (type) fieldsToUpdate.type = type;
+        if (processor) fieldsToUpdate.processor = processor;
+        if (memory) fieldsToUpdate.memory = memory;
+        if (gpu) fieldsToUpdate.gpu = gpu;
+        if (ssd) fieldsToUpdate.ssd = ssd;
+        if (hdd) fieldsToUpdate.hdd = hdd;
         if (stars) fieldsToUpdate.stars = Number(stars);
         if (image) fieldsToUpdate.image = image;
 

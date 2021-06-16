@@ -1,22 +1,27 @@
 const express = require("express");
 const path = require("path"); //////////////////////
 const hbs = require("hbs"); ////////////////////
+const passport = require("passport");
+require("./authentication/passport");
 const indexRoutes = require("./routes/index.routes");
 const productsRoutes = require("./routes/products.routes");
+const authRoutes = require("./routes/auth.routes");
 const usersRoutes = require("./routes/users.routes");
 const ordersRoutes = require("./routes/orders.routes");
 const db = require("./db");
 
 db.connect();
 
-const PORT = 3500;
+const PORT = 3000;
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views")); /////////////////
 app.set("view engine", "hbs"); //////////////
 
 hbs.registerHelper("gte", (a, b, opts) => {
+    /////////////
     if (a >= b) {
         return opts.fn(this);
     } else {
@@ -24,15 +29,12 @@ hbs.registerHelper("gte", (a, b, opts) => {
     }
 });
 
-hbs.registerHelper("uppercase", (str) => {
-    return str.toUperCase();
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRoutes);
 app.use("/products", productsRoutes);
+app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/orders", ordersRoutes);
 
