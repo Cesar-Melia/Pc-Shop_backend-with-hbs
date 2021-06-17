@@ -1,6 +1,8 @@
 const express = require("express");
-const path = require("path"); //////////////////////
-const hbs = require("hbs"); ////////////////////
+const path = require("path"); //
+const hbs = require("hbs"); //
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const passport = require("passport");
 require("./authentication/passport");
 const indexRoutes = require("./routes/index.routes");
@@ -16,12 +18,27 @@ const PORT = 3000;
 
 const app = express();
 
+app.use(
+    session({
+        secret: "sdfasfadsg34534534fd!",
+        resave: false,
+        saveUninitialized: false,
+        cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },
+
+        store: MongoStore.create({ mongoUrl: db.DB_URL }),
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join(__dirname, "views")); /////////////////
-app.set("view engine", "hbs"); //////////////
+
+app.set("views", path.join(__dirname, "views")); //
+app.set("view engine", "hbs"); //
 
 hbs.registerHelper("gte", (a, b, opts) => {
-    /////////////
+    //
     if (a >= b) {
         return opts.fn(this);
     } else {
@@ -54,7 +71,6 @@ app.use((error, req, res, next) => {
     });
 });
 
-app.disable("x-powered-by");
 app.listen(PORT, () => {
     console.log(`Server listening in port: ${PORT}`);
 });

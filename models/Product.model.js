@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema(
         hdd: { type: String },
         stars: { type: Number },
         image: { type: String, required: true },
+        stock: { type: Number, required: true },
     },
     { timestamps: true }
 );

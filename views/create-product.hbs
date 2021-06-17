@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles/main.css" />
 
-        <title>Register</title>
+        <title>Create Product</title>
     </head>
     <body>
         <header class="b-header d-flex justify-content-center">
@@ -41,9 +41,9 @@
         </header>
         <main class="b-main">
 
-            <h1 class="b-text__title">Registro</h1>
+            <h1 class="b-text__title">Crear Producto</h1>
 
-            <form action="/auth/register" method="POST">
+            <form action="/products/create" method="POST">
 
                 <div>
                     <label>Nombre</label>
@@ -51,29 +51,49 @@
                 </div>
 
                 <div>
-                    <label>Apellidos</label>
-                    <input name="lastName" type="text" required placeholder="lastName" />
+                    <label>Precio</label>
+                    <input name="price" type="text" required placeholder="Precio" />
                 </div>
                 <div>
                     <label>Email</label>
-                    <input name="email" type="email" required placeholder="Email" />
+                    <textarea name="description" required placeholder="Descripción"></textarea>
                 </div>
                 <div>
-                    <label>Contraseña</label>
-                    <input name="password" type="password" required placeholder="Password" />
+                    <label>Tipo</label>
+                    <input name="type" type="text" required placeholder="Tipo (pc-tower, laptop)" />
                 </div>
                 <div>
-                    <label>Dirección</label>
-                    <input name="adress" type="text" required placeholder="Dirección" />
+                    <label>Procesador</label>
+                    <input name="processor" type="text" placeholder="Procesador" />
                 </div>
 
                 <div>
-                    <label>País</label>
-                    <input name="country" type="text" required placeholder="País" />
+                    <label>Memória</label>
+                    <input name="memory" type="text" placeholder="memória" />
                 </div>
                 <div>
-                    <label>Ciudad</label>
-                    <input name="city" type="text" required placeholder="Ciudad" />
+                    <label>GPU</label>
+                    <input name="gpu" type="text" placeholder="GPU" />
+                </div>
+                <div>
+                    <label>SSD</label>
+                    <input name="ssd" type="text" placeholder="SSD" />
+                </div>
+                <div>
+                    <label>HDD</label>
+                    <input name="hdd" type="text" placeholder="HDD" />
+                </div>
+                <div>
+                    <label>Valoración</label>
+                    <input name="stars" type="text" placeholder="Valoración" />
+                </div>
+                <div>
+                    <label>Imagen</label>
+                    <input name="image" type="text" required placeholder="Imagen" />
+                </div>
+                <div>
+                    <label>Stock</label>
+                    <input name="stock" type="text" required placeholder="Stock" />
                 </div>
 
                 <div>

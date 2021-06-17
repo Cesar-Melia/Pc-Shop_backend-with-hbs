@@ -1,6 +1,6 @@
 :root {
-  --color-background: #f8e2ba;
-  --color-text-active: #040e27;
+  --color-background: #e0ded9;
+  --color-text-active: #000000;
   --color-text: #102d77;
   --color-light-blue: #bbceff;
   --color-blue: #6392ff;
@@ -5175,15 +5175,25 @@ body {
   margin-bottom: 60px;
 }
 
+.b-text__title--red {
+  color: red;
+}
+
+.b-text__title2 {
+  font-size: 20px;
+  text-align: center;
+}
+
 .b-header {
   margin-bottom: 70px;
   background-color: var(--color-light-blue);
   width: 100%;
   border-bottom: 2px solid;
+  position: relative;
 }
 
 .b-header__nav {
-  max-width: 1200px;
+  max-width: 1400px;
 }
 
 .b-header__link {
@@ -5195,6 +5205,27 @@ body {
 
 .b-header__link:hover {
   color: var(--color-text-active);
+}
+
+.b-header__link--user {
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.b-header__user-auth {
+  position: absolute;
+  right: 50px;
+}
+
+.b-header__logout {
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
+.b-header__button {
+  font-size: 12px;
+  background-color: var(--color-blue);
+  border-radius: 6px;
 }
 
 .b-main {

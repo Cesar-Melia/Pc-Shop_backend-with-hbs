@@ -4,7 +4,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles/main.css" />
-        <title>Error</title>
+
+        <title>Order</title>
     </head>
     <body>
         <header class="b-header d-flex justify-content-center">
@@ -39,10 +40,20 @@
             </nav>
         </header>
         <main class="b-main">
-            <h1 class="b-text__title b-text__title--red">Error: {{status}}</h1>
-
-            <h4 class="b-text__title2">{{message}}</h4>
+            <h1 class="b-text__title">Pedidos</h1>
+            {{#if order}}
+                <h4>
+                    <a href="/orders/{{_id}}">
+                        ID:
+                        {{_id}}
+                    </a>
+                </h4>
+                <h4>Usuario: {{user}}</h4>
+                <h4>Productos: {{products}}</h4>
+                <h4>Fecha: {{date}}</h4>
+            {{else}}
+                No existe
+            {{/if}}
         </main>
-
     </body>
 </html>

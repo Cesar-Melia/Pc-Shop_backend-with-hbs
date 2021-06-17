@@ -3,9 +3,10 @@
     background-color: var(--color-light-blue);
     width: 100%;
     border-bottom: 2px solid;
+    position: relative;
 
     &__nav {
-        max-width: 1200px;
+        max-width: 1400px;
     }
 
     &__link {
@@ -17,5 +18,25 @@
         &:hover {
             color: var(--color-text-active);
         }
+
+        &--user {
+            font-size: 14px;
+            margin: 0 10px;
+        }
+    }
+
+    &__user-auth {
+        position: absolute;
+        right: 50px;
+    }
+
+    &__logout {
+        margin-block-end: 0;
+    }
+
+    &__button {
+        font-size: 12px;
+        background-color: var(--color-blue);
+        border-radius: 6px;
     }
 }

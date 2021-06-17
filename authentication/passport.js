@@ -3,6 +3,20 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("../models/User.model");
 
+passport.serializeUser((user, done) => {
+    return done(null, user._id);
+});
+
+passport.deserializeUser(async (userId, done) => {
+    try {
+        const existingUser = await User.findById(userId);
+
+        return done(null, existingUser);
+    } catch (error) {
+        return done(error, null);
+    }
+});
+
 const isValidEmail = (email) => {
     const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -15,6 +29,42 @@ const isValidPassword = (password) => {
 
     return re.test(String(password));
 };
+
+const loginStrategy = new LocalStrategy(
+    {
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true,
+    },
+    async (req, email, password, done) => {
+        try {
+            const existingUser = await User.findOne({ email });
+
+            if (!existingUser) {
+                const error = new Error("El usuario no existe");
+                error.status = 401;
+
+                return done(error, null);
+            }
+
+            const isValidPassword = await bcrypt.compare(password, existingUser.password);
+
+            if (!isValidPassword) {
+                const error = new error("La contraseña no es valida.");
+
+                return done(error, null);
+            }
+
+            existingUser.password = null;
+
+            return done(null, existingUser);
+        } catch (error) {
+            console.log("Error en la estrategia del login", error);
+
+            return done(error, null);
+        }
+    }
+);
 
 const registerStrategy = new LocalStrategy(
     {
@@ -54,6 +104,7 @@ const registerStrategy = new LocalStrategy(
                 country: req.body.country,
                 city: req.body.city,
                 orders: [],
+                cart: [],
             });
 
             const savedUser = await newUser.save();
@@ -67,3 +118,4 @@ const registerStrategy = new LocalStrategy(
 );
 
 passport.use("register", registerStrategy);
+passport.use("login", loginStrategy);

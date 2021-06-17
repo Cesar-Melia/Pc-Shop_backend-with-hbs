@@ -5,21 +5,14 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
     try {
         const products = await Product.find();
-        return res.status(200).render("products", { products });
+        return res.status(200).render("products", { user: req.user, products });
     } catch (error) {
         return next(error);
     }
 });
 
-router.get("/:id", async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const product = await Product.findById(id);
-
-        return res.status(200).render("product", { product });
-    } catch (error) {
-        return next(error);
-    }
+router.get("/create", async (req, res, next) => {
+    return res.render("create-products", { user: req.user });
 });
 
 router.post("/create", async (req, res, next) => {
@@ -38,6 +31,7 @@ router.post("/create", async (req, res, next) => {
             hdd,
             stars,
             image,
+            stock,
         });
 
         const createProduct = await newProduct.save();
@@ -63,6 +57,7 @@ router.put("/edit", async (req, res, next) => {
             hdd,
             stars,
             image,
+            stock,
         } = req.body;
 
         const fieldsToUpdate = {};
@@ -77,12 +72,24 @@ router.put("/edit", async (req, res, next) => {
         if (hdd) fieldsToUpdate.hdd = hdd;
         if (stars) fieldsToUpdate.stars = Number(stars);
         if (image) fieldsToUpdate.image = image;
+        if (stock) fieldsToUpdate.stock = stock;
 
         const updatedProduct = await Product.findByIdAndUpdate(_id, fieldsToUpdate, { new: true });
 
         return res.status(200).json(updatedProduct);
     } catch (error) {
         next(error);
+    }
+});
+
+router.get("/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+
+        return res.status(200).render("product", { user: req.user, product });
+    } catch (error) {
+        return next(error);
     }
 });
 
