@@ -1,4 +1,6 @@
 const express = require("express");
+const { isAdmin } = require("../middlewares/auth.middleware");
+const { upload } = require("../middlewares/file.middleware");
 const Product = require("../models/Product.model");
 const router = express.Router();
 
@@ -11,14 +13,17 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.get("/create", async (req, res, next) => {
-    return res.render("create-products", { user: req.user });
+router.get("/create", [isAdmin], (req, res, next) => {
+    return res.render("create-product", { user: req.user });
 });
 
-router.post("/create", async (req, res, next) => {
+router.post("/create", [isAdmin], [upload.single("image")], async (req, res, next) => {
     try {
-        const { name, price, description, type, processor, memory, gpu, ssd, hdd, stars, image } =
+        const { name, price, description, type, processor, memory, gpu, ssd, hdd, stars, stock } =
             req.body;
+
+        const image = req.file ? req.file.filename : "";
+
         const newProduct = new Product({
             name,
             price,
@@ -35,13 +40,14 @@ router.post("/create", async (req, res, next) => {
         });
 
         const createProduct = await newProduct.save();
+
         return res.status(201).json(createProduct);
     } catch (error) {
         return next(error);
     }
 });
 
-router.put("/edit", async (req, res, next) => {
+router.put("/edit", [isAdmin], async (req, res, next) => {
     console.log("Endpoint EDIT");
     try {
         const {
@@ -93,7 +99,7 @@ router.get("/:id", async (req, res, next) => {
     }
 });
 
-router.delete("/:_id", async (req, res, next) => {
+router.delete("/:_id", [isAdmin], async (req, res, next) => {
     try {
         const { _id } = req.params;
         let response = "";

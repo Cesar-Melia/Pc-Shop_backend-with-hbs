@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
     }
 
     return res.status(200).render("index", { user: req.user, isAdmin });
-    //.send("API Pc Shop");
 });
 
 module.exports = router;

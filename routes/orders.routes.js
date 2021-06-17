@@ -1,24 +1,14 @@
 const express = require("express");
+const { isAdmin } = require("../middlewares/auth.middleware");
 const Order = require("../models/Order.model");
 
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/", [isAdmin], async (req, res, next) => {
     try {
         const orders = await Order.find().populate("users").populate("products");
 
         return res.status(200).render("orders", { user: req.user, orders });
-    } catch (error) {
-        return next(error);
-    }
-});
-
-router.get("/:id", async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const order = await Order.findById(id).populate("users").populate("products");
-
-        return res.status(200).render("order", { user: req.user, order });
     } catch (error) {
         return next(error);
     }
@@ -30,6 +20,8 @@ router.post("/create", async (req, res, next) => {
         const newOrder = new Order({ user, products, date });
 
         const createdOrder = await newOrder.save();
+
+        console.log(createdOrder);
 
         return res.status(200).render("order", { user: req.user, createdOrder });
     } catch (error) {
@@ -50,6 +42,34 @@ router.put("/add-product", async (req, res, next) => {
         );
 
         return res.status(200).json(updatedOrder);
+    } catch (error) {
+        return next(error);
+    }
+});
+
+router.get("/edit", [isAdmin], async (req, res, next) => {
+    try {
+        const { _id, user, products, date } = req.body;
+
+        const fieldsToUpdate = {};
+        if (user) fieldsToUpdate.user = user;
+        if (products) fieldsToUpdate.products = products;
+        if (date) fieldsToUpdate.date = date;
+
+        const updatedOrder = await Order.findByIdAndUpdate(_id, fieldsToUpdate, { new: true });
+
+        return res.status(200).render("order", { user: req.user, updatedOrder });
+    } catch (error) {
+        return next(error);
+    }
+});
+
+router.get("/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const order = await Order.findById(id).populate("users").populate("products");
+
+        return res.status(200).render("order", { user: req.user, order });
     } catch (error) {
         return next(error);
     }

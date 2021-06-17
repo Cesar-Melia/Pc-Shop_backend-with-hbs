@@ -1,15 +1,21 @@
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=h1, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles/main.css" />
-
-        <title>Users</title>
+        <title>Admin Options</title>
     </head>
+
     <body>
         <header class="b-header d-flex justify-content-center">
             <nav class="b-header__nav d-flex justify-content-between align-items-center">
+
+                {{!-- {{#if isAdmin}} --}}
+                <a class="b-header__admin b-header__link--user" href="/admin">Admin Options</a>
+                {{!-- {{/if}} --}}
+
                 <div class="d-flex justify-content-between">
                     <h3><a class="b-header__link" href="/">Inicio</a></h3>
                     <h3><a class="b-header__link" href="/products">Productos</a></h3>
@@ -39,31 +45,27 @@
 
             </nav>
         </header>
-        <main class="b-main">
-            <h1 class="b-text__title"> Usuarios</h1>
-            <ul>
-                {{#each users}}
-                    <li>
-                        <h4>
-                            <a class="b-text__link" href="/users/{{_id}}">
-                                ID:
-                                {{_id}}
-                            </a>
-                        </h4>
-                        <h4>Role: {{role}}</h4>
-                        <h4>Email: {{email}}</h4>
-                        <h4>Contraseña: {{password}}</h4>
-                        <h4>Nombre: {{name}}</h4>
-                        <h4>Apellidos: {{lastName}}</h4>
-                        <h4>Dirección: {{adress}}</h4>
-                        <h4>País: {{country}}</h4>
-                        <h4>Ciudad: {{city}}</h4>
-                        <h4>Pedidos: {{orders}}</h4>
-
-                    </li>
-                    <hr />
-                {{/each}}
-            </ul>
+        <main class="b-main d-flex align-items-center flex-column">
+            <h1 class="b-text__title">Admin Options</h1>
+            <div class="b-admin__pannel d-flex justify-content-between row">
+                <div class="d-flex align-items-center flex-column col-4">
+                    <h3 class="b-text__title2">Productos</h3>
+                    <h4><a class="b-text__title3" href="/products/create">Crear Producto</a></h4>
+                    <h4><a class="b-text__title3" href="/products/edit">Editar Producto</a></h4>
+                </div>
+                <div class="d-flex align-items-center flex-column col-4">
+                    <h3 class="b-text__title2">Pedidos</h3>
+                    <h4><a class="b-text__title3" href="/orders">Ver Pedidos</a></h4>
+                    <h4><a class="b-text__title3" href="/orders/edit">Editar Pedido</a></h4>
+                </div>
+                <div class="d-flex align-items-center flex-column col-4">
+                    <h3 class="b-text__title2">Usuarios</h3>
+                    <h4><a class="b-text__title3" href="/users">Ver Usuarios</a></h4>
+                    <h4><a class="b-text__title3" href="/users/edit">Editar Usuario</a></h4>
+                </div>
+            </div>
         </main>
+
     </body>
+
 </html>

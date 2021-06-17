@@ -39,4 +39,12 @@
         background-color: var(--color-blue);
         border-radius: 6px;
     }
+
+    &__admin {
+        position: absolute;
+        left: 50px;
+        font-size: 18px;
+        color: var(--color-red);
+        text-decoration: none;
+    }
 }

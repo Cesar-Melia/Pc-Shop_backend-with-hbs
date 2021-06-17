@@ -1,5 +1,6 @@
 //SETINGS
 @import "./colors";
+@import "../assets/fonts/pc-shop-v1.0/style.scss";
 
 //GENERIC
 @import "./normalize.scss";
@@ -13,5 +14,7 @@
 @import "./b-header";
 @import "./b-home";
 @import "./b-main";
+@import "./b-form";
+@import "./b-admin";
 
 //UTILITIES

@@ -5,12 +5,26 @@
         margin-bottom: 60px;
 
         &--red {
-            color: red;
+            color: var(--color-red);
         }
     }
 
     &__title2 {
-        font-size: 20px;
+        font-size: 24px;
         text-align: center;
+        border-bottom: 1px solid;
+    }
+
+    &__title3 {
+        font-size: 16px;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: var(--color-dark-blue);
+
+        &:hover {
+            color: var(--color-text);
+        }
     }
 }

@@ -6,6 +6,7 @@ const MongoStore = require("connect-mongo");
 const passport = require("passport");
 require("./authentication/passport");
 const indexRoutes = require("./routes/index.routes");
+const adminRoutes = require("./routes/admin.routes");
 const productsRoutes = require("./routes/products.routes");
 const authRoutes = require("./routes/auth.routes");
 const usersRoutes = require("./routes/users.routes");
@@ -50,6 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRoutes);
+app.use("/admin", adminRoutes);
 app.use("/products", productsRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);

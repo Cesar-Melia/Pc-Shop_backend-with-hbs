@@ -43,61 +43,111 @@
 
             <h1 class="b-text__title">Crear Producto</h1>
 
-            <form action="/products/create" method="POST">
+            <form
+                class="b-form d-flex justify-content-between align-items-center flex-column"
+                action="/products/create"
+                method="POST"
+                enctype="multipart/form-data"
+            >
 
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Nombre</label>
-                    <input name="name" type="text" required placeholder="Nombre" />
+                    <input
+                        class="b-form__input"
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Nombre"
+                    />
                 </div>
 
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Precio</label>
-                    <input name="price" type="text" required placeholder="Precio" />
+                    <input
+                        class="b-form__input"
+                        name="price"
+                        type="text"
+                        required
+                        placeholder="Precio"
+                    />
                 </div>
-                <div>
-                    <label>Email</label>
-                    <textarea name="description" required placeholder="Descripción"></textarea>
+                <div class="b-form__field d-flex justify-content-between">
+                    <label>Descripción</label>
+                    <textarea
+                        class="b-form__textarea"
+                        name="description"
+                        required
+                        placeholder="Descripción"
+                    ></textarea>
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Tipo</label>
-                    <input name="type" type="text" required placeholder="Tipo (pc-tower, laptop)" />
+                    <input
+                        class="b-form__input"
+                        name="type"
+                        type="text"
+                        required
+                        placeholder="Tipo (pc-tower, laptop)"
+                    />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Procesador</label>
-                    <input name="processor" type="text" placeholder="Procesador" />
+                    <input
+                        class="b-form__input"
+                        name="processor"
+                        type="text"
+                        placeholder="Procesador"
+                    />
                 </div>
 
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Memória</label>
-                    <input name="memory" type="text" placeholder="memória" />
+                    <input class="b-form__input" name="memory" type="text" placeholder="memória" />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>GPU</label>
-                    <input name="gpu" type="text" placeholder="GPU" />
+                    <input class="b-form__input" name="gpu" type="text" placeholder="GPU" />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>SSD</label>
-                    <input name="ssd" type="text" placeholder="SSD" />
+                    <input class="b-form__input" name="ssd" type="text" placeholder="SSD" />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>HDD</label>
-                    <input name="hdd" type="text" placeholder="HDD" />
+                    <input class="b-form__input" name="hdd" type="text" placeholder="HDD" />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Valoración</label>
-                    <input name="stars" type="text" placeholder="Valoración" />
+                    <input
+                        class="b-form__input"
+                        name="stars"
+                        type="text"
+                        placeholder="Valoración"
+                    />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Imagen</label>
-                    <input name="image" type="text" required placeholder="Imagen" />
+                    <input
+                        class="b-form__input"
+                        name="image"
+                        type="file"
+                        accept="image/*"
+                        required
+                    />
                 </div>
-                <div>
+                <div class="b-form__field d-flex align-items-center justify-content-between">
                     <label>Stock</label>
-                    <input name="stock" type="text" required placeholder="Stock" />
+                    <input
+                        class="b-form__input"
+                        name="stock"
+                        type="text"
+                        required
+                        placeholder="Stock"
+                    />
                 </div>
 
                 <div>
-                    <button type="submit">Registrarme</button>
+                    <button type="submit">Crear Producto</button>
                 </div>
             </form>
         </main>
