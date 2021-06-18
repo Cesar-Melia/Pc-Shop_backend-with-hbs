@@ -6,8 +6,13 @@ const router = express.Router();
 
 router.get("/", [isAdmin], async (req, res, next) => {
     try {
+        let isAdmin;
+        if (req.user && req.user.role === "admin") {
+            isAdmin = true;
+        }
+
         const users = await User.find().populate("orders");
-        return res.status(200).render("users", { user: req.user, users });
+        return res.status(200).render("users", { user: req.user, users, isAdmin });
     } catch (error) {
         return next(error);
     }
@@ -15,6 +20,11 @@ router.get("/", [isAdmin], async (req, res, next) => {
 
 router.get("/edit", [isAdmin], async (req, res, next) => {
     try {
+        let isAdmin;
+        if (req.user && req.user.role === "admin") {
+            isAdmin = true;
+        }
+
         const { _id, user, products, date } = req.body;
 
         const fieldsToUpdate = {};
@@ -24,7 +34,7 @@ router.get("/edit", [isAdmin], async (req, res, next) => {
 
         const updatedOrder = await User.findByIdAndUpdate(_id, fieldsToUpdate, { new: true });
 
-        return res.status(200).render("user", { user: req.user, updatedOrder });
+        return res.status(200).render("user", { user: req.user, updatedOrder, isAdmin });
     } catch (error) {
         return next(error);
     }
@@ -32,10 +42,15 @@ router.get("/edit", [isAdmin], async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
     try {
+        let isAdmin;
+        if (req.user && req.user.role === "admin") {
+            isAdmin = true;
+        }
+
         const { id } = req.params;
         const userDetail = await User.findById(id);
 
-        return res.status(200).render("user", { user: req.user, userDetail });
+        return res.status(200).render("user", { user: req.user, userDetail, isAdmin });
     } catch (error) {
         return next(error);
     }

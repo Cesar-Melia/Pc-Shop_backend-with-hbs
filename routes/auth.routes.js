@@ -3,11 +3,11 @@ const passport = require("passport");
 const router = express.Router();
 
 router.get("/register", (req, res, next) => {
-    return res.render("register", { user: req.user });
+    return res.render("register", { user: req.user, isAdmin: req.isAdmin });
 });
 
 router.get("/login", (req, res, next) => {
-    return res.render("login", { user: req.user });
+    return res.render("login", { user: req.user, isAdmin: req.isAdmin });
 });
 
 router.post("/register", (req, res, next) => {

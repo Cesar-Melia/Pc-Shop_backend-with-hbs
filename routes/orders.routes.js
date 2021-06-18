@@ -8,7 +8,7 @@ router.get("/", [isAdmin], async (req, res, next) => {
     try {
         const orders = await Order.find().populate("users").populate("products");
 
-        return res.status(200).render("orders", { user: req.user, orders });
+        return res.status(200).render("orders", { user: req.user, orders, isAdmin: req.isAdmin });
     } catch (error) {
         return next(error);
     }
@@ -16,6 +16,11 @@ router.get("/", [isAdmin], async (req, res, next) => {
 
 router.post("/create", async (req, res, next) => {
     try {
+        let isAdmin;
+        if (req.user && req.user.role === "admin") {
+            isAdmin = true;
+        }
+
         const { user, products, date } = req.body;
         const newOrder = new Order({ user, products, date });
 
@@ -23,7 +28,7 @@ router.post("/create", async (req, res, next) => {
 
         console.log(createdOrder);
 
-        return res.status(200).render("order", { user: req.user, createdOrder });
+        return res.status(200).render("order", { user: req.user, createdOrder, isAdmin });
     } catch (error) {
         next(error);
     }
@@ -58,7 +63,9 @@ router.get("/edit", [isAdmin], async (req, res, next) => {
 
         const updatedOrder = await Order.findByIdAndUpdate(_id, fieldsToUpdate, { new: true });
 
-        return res.status(200).render("order", { user: req.user, updatedOrder });
+        return res
+            .status(200)
+            .render("order", { user: req.user, updatedOrder, isAdmin: req.isAdmin });
     } catch (error) {
         return next(error);
     }
@@ -69,7 +76,7 @@ router.get("/:id", async (req, res, next) => {
         const { id } = req.params;
         const order = await Order.findById(id).populate("users").populate("products");
 
-        return res.status(200).render("order", { user: req.user, order });
+        return res.status(200).render("order", { user: req.user, order, isAdmin: req.isAdmin });
     } catch (error) {
         return next(error);
     }

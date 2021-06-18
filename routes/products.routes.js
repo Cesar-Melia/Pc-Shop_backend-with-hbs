@@ -4,17 +4,39 @@ const { upload } = require("../middlewares/file.middleware");
 const Product = require("../models/Product.model");
 const router = express.Router();
 
-router.get("/", async (req, res, next) => {
+router.get("/", [isAdmin], async (req, res, next) => {
     try {
         const products = await Product.find();
-        return res.status(200).render("products", { user: req.user, products });
+        return res
+            .status(200)
+            .render("products", { user: req.user, products, isAdmin: req.isAdmin });
+    } catch (error) {
+        return next(error);
+    }
+});
+
+router.get("/shop", async (req, res, next) => {
+    try {
+        const products = await Product.find();
+        // const pcs = await Product.find({ type: "pc-tower" });
+        // const laptop = await Product.find({ type: "laptop" });
+        // const priceOrderUp = await Product.find().sort({ price: 1 });
+        // const priceOrderDown = await Product.find().sort({ price: -1 });
+        // const fourStars = await Product.find({ stars: { $gte: 4 } });
+        // const lastUnits = await Product.find({ stock: { $lte: 5 } });
+
+        return res.status(200).render("shop", {
+            user: req.user,
+            products,
+            isAdmin: req.isAdmin,
+        });
     } catch (error) {
         return next(error);
     }
 });
 
 router.get("/create", [isAdmin], (req, res, next) => {
-    return res.render("create-product", { user: req.user });
+    return res.render("create-product", { user: req.user, isAdmin: req.isAdmin });
 });
 
 router.post("/create", [isAdmin], [upload.single("image")], async (req, res, next) => {
@@ -93,7 +115,7 @@ router.get("/:id", async (req, res, next) => {
         const { id } = req.params;
         const product = await Product.findById(id);
 
-        return res.status(200).render("product", { user: req.user, product });
+        return res.status(200).render("product", { user: req.user, product, isAdmin: req.isAdmin });
     } catch (error) {
         return next(error);
     }

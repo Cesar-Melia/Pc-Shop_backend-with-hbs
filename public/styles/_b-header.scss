@@ -1,9 +1,8 @@
 .b-header {
-    margin-bottom: 70px;
-    background-color: var(--color-light-blue);
+    background-color: var(--color-header);
     width: 100%;
-    border-bottom: 2px solid;
-    position: relative;
+    position: fixed;
+    box-shadow: 0px 4px 8px var(--color-transparent-black);
 
     &__nav {
         max-width: 1400px;
@@ -23,6 +22,11 @@
             font-size: 14px;
             margin: 0 10px;
         }
+
+        &--cart {
+            font-size: 18px;
+            margin: 0 20px;
+        }
     }
 
     &__user-auth {
@@ -36,7 +40,7 @@
 
     &__button {
         font-size: 12px;
-        background-color: var(--color-blue);
+        background-color: var(--color-background-main);
         border-radius: 6px;
     }
 
@@ -46,5 +50,12 @@
         font-size: 18px;
         color: var(--color-red);
         text-decoration: none;
+    }
+
+    &__cart {
+        font-size: 32px;
+        color: var(--color-text);
+        margin-right: 14px;
+        z-index: 999;
     }
 }

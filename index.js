@@ -50,6 +50,19 @@ hbs.registerHelper("gte", (a, b, opts) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+    req.isAdmin = false;
+
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+
+    if (req.user && req.user.role === "admin") {
+        req.isAdmin = true;
+    }
+    return next();
+});
+
 app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);
 app.use("/products", productsRoutes);
@@ -70,6 +83,7 @@ app.use((error, req, res, next) => {
     return res.status(error.status || 500).render("error", {
         message: error.message,
         status: error.status || 500,
+        user: req.user,
     });
 });
 

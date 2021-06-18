@@ -1,3 +1,8 @@
 .b-main {
-    margin: 0 80px;
+    margin: auto;
+    max-width: 1200px;
+    min-height: 88vh;
+    padding: 50px 50px 50px 50px;
+    background-color: var(--color-background-main);
+    box-shadow: 0px 0px 4px var(--color-transparent-black);
 }

@@ -12,18 +12,16 @@
         <header class="b-header d-flex justify-content-center">
             <nav class="b-header__nav d-flex justify-content-between align-items-center">
 
-                {{!-- {{#if isAdmin}} --}}
-                <a class="b-header__admin b-header__link--user" href="/admin">Admin Options</a>
-                {{!-- {{/if}} --}}
+                {{#if isAdmin}}
+                    <a class="b-header__admin b-header__link--user" href="/admin">Admin Options</a>
+                {{/if}}
 
                 <div class="d-flex justify-content-between">
                     <h3><a class="b-header__link" href="/">Inicio</a></h3>
-                    <h3><a class="b-header__link" href="/products">Productos</a></h3>
-                    <h3><a class="b-header__link" href="/orders">Pedidos</a></h3>
-                    <h3><a class="b-header__link" href="/users">Usuarios</a></h3>
+                    <h3><a class="b-header__link" href="/products/shop">Tienda</a></h3>
                 </div>
                 <div class="b-header__user-auth d-flex justify-content-between align-items-center">
-                    <span class="b-header__cart icon-shopping-cart"></span>
+                    <h3><a class="b-header__link b-header__link--cart" href="/cart">Cesta</a></h3>
                     {{#if user}}
                         <form
                             class="b-header__logout d-flex align-items-center justify-content-center"
@@ -47,9 +45,8 @@
             </nav>
         </header>
         <main class="b-main">
-            <h1 class="b-text__title">Bienvenido a PC shop {{user.name}}</h1>
+            <h1 class="b-text__title">Bienvenido a PC Shop {{user.name}}</h1>
             <div>
-
             </div>
         </main>
 
