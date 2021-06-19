@@ -4,7 +4,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="/styles/main.css" />
-        <script src="/js/shop.js" defer></script>
+        <script src="/js/main.js" defer></script>
 
         <title>Products</title>
     </head>
@@ -125,9 +125,13 @@
                                 class="b-gallery__price-block d-flex justify-content-between align-items-center"
                             >
                                 <span class="b-gallery__text">{{price}} €</span>
-                                <button class="b-gallery__button">Añadir</button>
-                            </div>
 
+                                <button
+                                    data-function="addButton"
+                                    onclick="addToCart('{{../user}}','{{_id}}')"
+                                    class="b-gallery__button"
+                                >Añadir</button>
+                            </div>
                         </div>
                     {{/each}}
                 </div>

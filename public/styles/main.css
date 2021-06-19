@@ -5306,7 +5306,7 @@ body {
 
 .b-main {
   margin: auto;
-  max-width: 1200px;
+  max-width: 1000px;
   min-height: 88vh;
   padding: 50px 50px 50px 50px;
   background-color: var(--color-background-main);
@@ -5413,5 +5413,26 @@ body {
   background-color: var(--color-white);
   border: 1px solid;
   border-radius: 4px;
+}
+
+.b-cart {
+  min-width: 300px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.b-cart__product {
+  font-size: 16px;
+  margin: 0 30px 15px 0;
+}
+
+.b-cart__price {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.b-cart__total {
+  margin-bottom: 15px;
+  font-size: 20px;
 }
 /*# sourceMappingURL=main.css.map */

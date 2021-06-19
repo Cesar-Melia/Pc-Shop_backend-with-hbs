@@ -18,15 +18,9 @@ router.get("/", [isAdmin], async (req, res, next) => {
 router.get("/shop", async (req, res, next) => {
     try {
         const products = await Product.find();
-        // const pcs = await Product.find({ type: "pc-tower" });
-        // const laptop = await Product.find({ type: "laptop" });
-        // const priceOrderUp = await Product.find().sort({ price: 1 });
-        // const priceOrderDown = await Product.find().sort({ price: -1 });
-        // const fourStars = await Product.find({ stars: { $gte: 4 } });
-        // const lastUnits = await Product.find({ stock: { $lte: 5 } });
 
         return res.status(200).render("shop", {
-            user: req.user,
+            user: req.user._id,
             products,
             isAdmin: req.isAdmin,
         });
@@ -115,7 +109,9 @@ router.get("/:id", async (req, res, next) => {
         const { id } = req.params;
         const product = await Product.findById(id);
 
-        return res.status(200).render("product", { user: req.user, product, isAdmin: req.isAdmin });
+        // return res.status(200).render("product", { user: req.user, product, isAdmin: req.isAdmin });
+
+        return res.status(200).json(product);
     } catch (error) {
         return next(error);
     }

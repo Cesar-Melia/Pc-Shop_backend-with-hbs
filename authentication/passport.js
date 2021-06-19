@@ -50,7 +50,7 @@ const loginStrategy = new LocalStrategy(
             const isValidPassword = await bcrypt.compare(password, existingUser.password);
 
             if (!isValidPassword) {
-                const error = new error("La contraseña no es valida.");
+                const error = new Error("La contraseña no es valida.");
 
                 return done(error, null);
             }
@@ -104,7 +104,6 @@ const registerStrategy = new LocalStrategy(
                 country: req.body.country,
                 city: req.body.city,
                 orders: [],
-                cart: [],
             });
 
             const savedUser = await newUser.save();

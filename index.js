@@ -11,6 +11,7 @@ const productsRoutes = require("./routes/products.routes");
 const authRoutes = require("./routes/auth.routes");
 const usersRoutes = require("./routes/users.routes");
 const ordersRoutes = require("./routes/orders.routes");
+const cartsRoutes = require("./routes/cart.routes");
 const db = require("./db");
 
 db.connect();
@@ -69,12 +70,13 @@ app.use("/products", productsRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/orders", ordersRoutes);
+app.use("/cart", cartsRoutes);
 
 app.use("*", (req, res) => {
     const error = new Error("Ruta no encontradas");
     error.status = 404;
 
-    return res.status(404).json(error);
+    return res.status(404).render("error");
 });
 
 app.use((error, req, res, next) => {
@@ -84,6 +86,7 @@ app.use((error, req, res, next) => {
         message: error.message,
         status: error.status || 500,
         user: req.user,
+        isAdmin: req.isAdmin,
     });
 });
 

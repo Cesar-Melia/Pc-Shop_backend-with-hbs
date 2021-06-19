@@ -1,0 +1,20 @@
+.b-cart {
+    min-width: 300px;
+    max-width: 800px;
+    margin: 0 auto;
+
+    &__product {
+        font-size: 16px;
+        margin: 0 30px 15px 0;
+    }
+
+    &__price {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    &__total {
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+}

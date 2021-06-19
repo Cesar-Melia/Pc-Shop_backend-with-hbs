@@ -13,6 +13,11 @@ const productSchema = new mongoose.Schema(
         hdd: { type: String },
         stars: { type: Number },
         image: { type: String, required: true },
+        comments: [
+            { text: { type: String, required: true } },
+            { userId: { type: mongoose.Types.ObjectId, ref: "Users" } },
+            { date: { type: Number } },
+        ],
         stock: { type: Number, required: true },
     },
     { timestamps: true }

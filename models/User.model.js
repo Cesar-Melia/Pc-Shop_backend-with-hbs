@@ -12,7 +12,7 @@ const userSchema = new Schema(
         country: { type: String, required: true },
         city: { type: String, required: true },
         orders: [{ type: mongoose.Types.ObjectId, ref: "Orders" }],
-        cart: [{ type: mongoose.Types.ObjectId, ref: "Products" }],
+        cart: { type: mongoose.Types.ObjectId, ref: "Carts" },
         role: { type: String, enum: ["user", "admin"], default: "user", required: true },
     },
     { timestamps: true }
