@@ -1,6 +1,6 @@
 @charset "UTF-8";
 :root {
-  --color-background-main: #f6f7ff;
+  --color-background-main: #ffffff;
   --color-background: #d5e1ff;
   --color-text-active: #000000;
   --color-header: #fadc9c;
@@ -5240,12 +5240,19 @@ body {
   color: var(--color-text);
 }
 
+.b-text__list {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
 .b-header {
   background-color: var(--color-header);
   width: 100%;
   position: fixed;
   -webkit-box-shadow: 0px 4px 8px var(--color-transparent-black);
           box-shadow: 0px 4px 8px var(--color-transparent-black);
+  z-index: 999;
 }
 
 .b-header__nav {
@@ -5306,9 +5313,9 @@ body {
 
 .b-main {
   margin: auto;
-  max-width: 1000px;
+  max-width: 1100px;
   min-height: 88vh;
-  padding: 50px 50px 50px 50px;
+  padding: 50px 10px 50px 10px;
   background-color: var(--color-background-main);
   -webkit-box-shadow: 0px 0px 4px var(--color-transparent-black);
           box-shadow: 0px 0px 4px var(--color-transparent-black);

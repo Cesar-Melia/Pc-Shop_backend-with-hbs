@@ -28,9 +28,32 @@ const addToCart = async (userId, productId) => {
 
             return console.log("Cesta creada y producto añadido");
         }
+
         console.log("TODO");
+
+        try {
+            console.log("Cart ID: ", cart._id);
+
+            await fetch(`${API_URL}/cart/add-product/${cart._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    product: productId,
+                    quantity: 1,
+                    total: cart.total + product.price,
+                }),
+            });
+
+            console.log(cart.products);
+
+            return console.log("Producto añadido");
+        } catch (error) {
+            return console.log("Error añadiendo producto: ", error);
+        }
     } catch (error) {
-        console.log("Error creando la cesta: ", error);
+        return console.log("Error con la cesta: ", error);
     }
 };
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const { isAdmin } = require("../middlewares/auth.middleware");
-const { upload } = require("../middlewares/file.middleware");
+const { upload, uploadToCloudinary } = require("../middlewares/file.middleware");
 const Product = require("../models/Product.model");
 const router = express.Router();
 
@@ -33,38 +33,57 @@ router.get("/create", [isAdmin], (req, res, next) => {
     return res.render("create-product", { user: req.user, isAdmin: req.isAdmin });
 });
 
-router.post("/create", [isAdmin], [upload.single("image")], async (req, res, next) => {
-    try {
-        const { name, price, description, type, processor, memory, gpu, ssd, hdd, stars, stock } =
-            req.body;
+router.post(
+    "/create",
+    [isAdmin],
+    [upload.single("image"), uploadToCloudinary],
+    async (req, res, next) => {
+        try {
+            const {
+                name,
+                price,
+                description,
+                type,
+                processor,
+                memory,
+                gpu,
+                ssd,
+                hdd,
+                stars,
+                stock,
+            } = req.body;
 
-        const image = req.file ? req.file.filename : "";
+            const image = req.fileUrl ? req.fileUrl : "";
 
-        const newProduct = new Product({
-            name,
-            price,
-            description,
-            type,
-            processor,
-            memory,
-            gpu,
-            ssd,
-            hdd,
-            stars,
-            image,
-            stock,
-        });
+            const newProduct = new Product({
+                name,
+                price,
+                description,
+                type,
+                processor,
+                memory,
+                gpu,
+                ssd,
+                hdd,
+                stars,
+                image,
+                stock,
+            });
 
-        const createProduct = await newProduct.save();
+            const createProduct = await newProduct.save();
 
-        return res.status(201).json(createProduct);
-    } catch (error) {
-        return next(error);
+            return res.status(201).json(createProduct);
+        } catch (error) {
+            return next(error);
+        }
     }
+);
+
+router.get("/edit", [isAdmin], (req, res, next) => {
+    return res.render("edit-product", { user: req.user, isAdmin: req.isAdmin });
 });
 
 router.put("/edit", [isAdmin], async (req, res, next) => {
-    console.log("Endpoint EDIT");
     try {
         const {
             _id,
@@ -104,20 +123,11 @@ router.put("/edit", [isAdmin], async (req, res, next) => {
     }
 });
 
-router.get("/:id", async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const product = await Product.findById(id);
-
-        // return res.status(200).render("product", { user: req.user, product, isAdmin: req.isAdmin });
-
-        return res.status(200).json(product);
-    } catch (error) {
-        return next(error);
-    }
+router.get("/delete", [isAdmin], (req, res, next) => {
+    return res.render("delete-product", { user: req.user, isAdmin: req.isAdmin });
 });
 
-router.delete("/:_id", [isAdmin], async (req, res, next) => {
+router.delete("/delete/:_id", [isAdmin], async (req, res, next) => {
     try {
         const { _id } = req.params;
         let response = "";
@@ -129,6 +139,21 @@ router.delete("/:_id", [isAdmin], async (req, res, next) => {
         return res.status(200).json(response);
     } catch (error) {
         next(error);
+    }
+});
+
+router.get("/:id", async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+
+        console.log("Entra en products/id");
+
+        // return res.status(200).render("product", { user: req.user, product, isAdmin: req.isAdmin });
+
+        return res.status(200).json(product);
+    } catch (error) {
+        return next(error);
     }
 });
 

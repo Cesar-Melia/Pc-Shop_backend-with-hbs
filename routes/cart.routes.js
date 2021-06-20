@@ -4,11 +4,11 @@ const router = express.Router();
 
 router.get("/", async (req, res, next) => {
     try {
-        let cart = await Cart.find().populate("user").populate("products");
+        let cart = await Cart.find().populate("user").populate("products.product");
 
         console.log("La cesta: ", cart);
 
-        //return res.status(200).json(cart);
+        // return res.status(200).json(cart);
 
         return res.status(200).render("cesta", { user: req.user, cart, isAdmin: req.isAdmin });
     } catch (error) {
@@ -47,14 +47,17 @@ router.get("/:user", async (req, res, next) => {
     }
 });
 
-router.put("/add-product", async (req, res, next) => {
+router.put("/add-product/:cartId", async (req, res, next) => {
     try {
-        const { productId, quantity, cartId } = req.body;
+        const { product, quantity } = req.body;
+        const { cartId } = req.params;
+
+        console.log("Params para actualizar: ", product, quantity, cartId);
 
         const updatedCart = await Cart.findByIdAndUpdate(
             cartId,
             {
-                $addToSet: { products: { product: productId, quantity: quantity } },
+                $addToSet: { products: { product: product, quantity: quantity } },
             },
             { new: true }
         );
