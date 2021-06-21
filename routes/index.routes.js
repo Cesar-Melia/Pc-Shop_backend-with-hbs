@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { indexGet } = require("../controllers/index.controller");
 
-router.get("/", (req, res) => {
-    return res.status(200).render("index", { user: req.user, isAdmin: req.isAdmin });
-});
+router.get("/", indexGet);
 
 module.exports = router;

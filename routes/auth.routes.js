@@ -1,48 +1,22 @@
 const express = require("express");
-const passport = require("passport");
 const router = express.Router();
+const { isAuth } = require("../middlewares/auth.middleware");
+const {
+    registerGet,
+    loginGet,
+    registerPost,
+    loginPost,
+    logoutPost,
+} = require("../controllers/auth.controller");
 
-router.get("/register", (req, res, next) => {
-    return res.render("register", { user: req.user, isAdmin: req.isAdmin });
-});
+router.get("/register", registerGet);
 
-router.get("/login", (req, res, next) => {
-    return res.render("login", { user: req.user, isAdmin: req.isAdmin });
-});
+router.get("/login", loginGet);
 
-router.post("/register", (req, res, next) => {
-    const done = (error, user) => {
-        if (error) return next(error);
-        console.log(user);
-        return res.redirect("/products");
-    };
-    passport.authenticate("register", done)(req);
-});
+router.post("/register", registerPost);
 
-router.post("/login", (req, res, next) => {
-    const done = (error, user) => {
-        if (error) return next(error);
+router.post("/login", loginPost);
 
-        req.logIn(user, (error) => {
-            if (error) return next(error);
-            console.log(user);
-            return res.redirect("/");
-        });
-    };
-    passport.authenticate("login", done)(req);
-});
-
-router.post("/logout", (req, res, next) => {
-    if (req.user) {
-        req.logout();
-
-        req.session.destroy(() => {
-            res.clearCookie("connect.sid");
-            return res.redirect("/");
-        });
-    } else {
-        return res.status(200).json("No hay ningun usuario logueado");
-    }
-});
+router.post("/logout", isAuth, logoutPost);
 
 module.exports = router;

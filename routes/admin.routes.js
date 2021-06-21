@@ -1,9 +1,8 @@
 const express = require("express");
 const { isAdmin } = require("../middlewares/auth.middleware");
 const router = express.Router();
+const { adminGet } = require("../controllers/admin.controller");
 
-router.get("/", [isAdmin], (req, res) => {
-    return res.status(200).render("admin", { user: req.user, isAdmin: req.isAdmin });
-});
+router.get("/", [isAdmin], adminGet);
 
 module.exports = router;

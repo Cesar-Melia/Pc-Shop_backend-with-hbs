@@ -1,71 +1,26 @@
 const express = require("express");
-const Cart = require("../models/Cart.model");
+const {
+    cartsGet,
+    cartUserGet,
+    addToCartPost,
+    createPost,
+    cartDelete,
+    editPut,
+    addProductPut,
+} = require("../controllers/cart.controllers");
 const router = express.Router();
+const { isAdmin, isAuth } = require("../middlewares/auth.middleware");
 
-router.get("/", async (req, res, next) => {
-    try {
-        let cart = await Cart.find().populate("user").populate("products.product");
+router.get("/", isAdmin, cartsGet);
 
-        console.log("La cesta: ", cart);
+router.get("/user", isAuth, cartUserGet);
 
-        // return res.status(200).json(cart);
+router.put("/add-to-cart/:id", isAuth, addToCartPost);
 
-        return res.status(200).render("cesta", { user: req.user, cart, isAdmin: req.isAdmin });
-    } catch (error) {
-        return next(error);
-    }
-});
+router.post("/create", isAdmin, createPost);
 
-router.post("/create", async (req, res, next) => {
-    try {
-        const { user, products, quantity, total } = req.body;
+router.put("/edit", isAdmin, editPut);
 
-        const newCart = new Cart({
-            user,
-            products,
-            total,
-        });
-
-        const createdCart = await newCart.save();
-
-        return res.status(201).json(createdCart);
-    } catch (error) {
-        return next(error);
-    }
-});
-
-router.get("/:user", async (req, res, next) => {
-    try {
-        const { user } = req.params;
-
-        let cart = await Cart.find({ user: user }).populate("user").populate("products");
-        cart = cart[0];
-
-        return res.status(200).json(cart);
-    } catch (error) {
-        return next(error);
-    }
-});
-
-router.put("/add-product/:cartId", async (req, res, next) => {
-    try {
-        const { product, quantity } = req.body;
-        const { cartId } = req.params;
-
-        console.log("Params para actualizar: ", product, quantity, cartId);
-
-        const updatedCart = await Cart.findByIdAndUpdate(
-            cartId,
-            {
-                $addToSet: { products: { product: product, quantity: quantity } },
-            },
-            { new: true }
-        );
-
-        return res.status(200).json(updatedCart);
-    } catch (error) {
-        return next(error);
-    }
-});
+router.delete("/:id", cartDelete);
 
 module.exports = router;

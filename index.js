@@ -39,15 +39,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views")); //
 app.set("view engine", "hbs"); //
 
-hbs.registerHelper("gte", (a, b, opts) => {
-    //
-    if (a >= b) {
-        return opts.fn(this);
-    } else {
-        return opts.inverse(this);
-    }
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -76,7 +67,7 @@ app.use("*", (req, res) => {
     const error = new Error("Ruta no encontradas");
     error.status = 404;
 
-    return res.status(404).render("error");
+    return res.status(404).render("error", error);
 });
 
 app.use((error, req, res, next) => {
