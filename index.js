@@ -1,4 +1,5 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const path = require("path"); //
 const hbs = require("hbs"); //
 const session = require("express-session");
@@ -14,15 +15,17 @@ const ordersRoutes = require("./routes/orders.routes");
 const cartsRoutes = require("./routes/cart.routes");
 const db = require("./db");
 
+dotenv.config();
+
 db.connect();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 app.use(
     session({
-        secret: "sdfasfadsg34534534fd!",
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 },

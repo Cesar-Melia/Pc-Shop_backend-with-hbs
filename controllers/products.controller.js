@@ -15,8 +15,11 @@ const shopGet = async (req, res, next) => {
     try {
         const products = await Product.find();
 
+        let user;
+        req.user ? (user = req.user._id) : (user = "guest");
+
         return res.status(200).render("shop", {
-            user: req.user._id,
+            user,
             products,
             isAdmin: req.isAdmin,
         });
