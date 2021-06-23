@@ -21,7 +21,7 @@ const cartUserGet = async (req, res, next) => {
             existingCart.user.password = null;
         }
 
-        return res.json(existingCart);
+        return res.render("cesta", { user: req.user, isAdmin: req.isAdmin, cart: existingCart });
     } catch (error) {
         next(error);
     }
@@ -41,6 +41,7 @@ const addToCartPost = async (req, res, next) => {
                 {
                     product: productId,
                     quantity: 1,
+                    price: product.price,
                 },
             ],
             totalPrice: product.price,
@@ -61,6 +62,7 @@ const addToCartPost = async (req, res, next) => {
                         products: {
                             product: productId, ////
                             quantity: 1,
+                            price: product.price,
                         },
                     },
                     $inc: {
@@ -73,7 +75,7 @@ const addToCartPost = async (req, res, next) => {
                 .populate("user")
                 .populate("products.product");
 
-            return res.json(editedCart);
+            return res.redirect("/products/shop");
         } else {
             const newProducts = existingCart.products.map((prod) => {
                 if (prod.product.equals(productId)) {
@@ -100,8 +102,8 @@ const addToCartPost = async (req, res, next) => {
             console.log(editedProduct);
         }
     }
-
-    return res.redirect("/cart");
+    console.log(existingCart);
+    return res.redirect("/products/shop");
 };
 
 const createPost = async (req, res, next) => {

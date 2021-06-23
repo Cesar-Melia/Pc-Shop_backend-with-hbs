@@ -49,18 +49,32 @@
                 <ul>
                     {{#each cart.products}}
 
-                        <li>
-                            <span class="b-cart__price">{{this.product}}</span>
-                            <span class="b-cart__price"> x{{this.quantity}}</span>
+                        <li class="b-cart__list d-flex justify-content-between">
+                            <span class="b-cart__product">{{product.name}}</span>
+                            <div>
+                                <span class="b-cart__price"> {{price}} €</span><span
+                                    class="b-cart__quantity"
+                                > cant: {{quantity}}</span>
+                            </div>
+
                         </li>
                     {{/each}}
                     {{#if cart}}
                         <div class="b-cart__total d-flex justify-content-between">
                             <span>TOTAL:</span>
-                            <span>{{cart.total}} €</span>
+                            <span>{{cart.totalPrice}} €</span>
                         </div>
 
                     {{/if}}
+
+                    <form
+                        class="d-flex align-items-center justify-content-center"
+                        action="/orders/create{{_id}}"
+                        method="post"
+                    >
+                        <input class="b-dallery__button" type="submit" value="Comprar" />
+                    </form>
+
                 </ul>
 
             </div>

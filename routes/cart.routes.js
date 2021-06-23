@@ -15,7 +15,7 @@ router.get("/", isAdmin, cartsGet);
 
 router.get("/user", isAuth, cartUserGet);
 
-router.put("/add-to-cart/:id", isAuth, addToCartPost);
+router.post("/add-to-cart/:id", isAuth, addToCartPost);
 
 router.post("/create", isAdmin, createPost);
 
