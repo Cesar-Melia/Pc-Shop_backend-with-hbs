@@ -1,5 +1,6 @@
 const Order = require("../models/Order.model");
 const User = require("../models/User.model");
+const Cart = require("../models/Cart.model");
 
 const ordersGet = async (req, res, next) => {
     try {
@@ -13,16 +14,24 @@ const ordersGet = async (req, res, next) => {
 
 const createOrderPost = async (req, res, next) => {
     try {
-        const { user, products, adress, isPaid } = req.body;
-
+        const userId = req.user._id;
+        const existingCart = await Cart.findOne({ user: userId }).populate("user");
         const date = Date.now();
 
-        const newOrder = new Order({ user, products, date, adress, isPaid });
+        const newOrder = new Order({
+            user: userId,
+            products: existingCart.products,
+            totalPrice: existingCart.totalPrice,
+            totalQuantity: existingCart.totalQuantity,
+            date: date,
+            adress: req.user.adress,
+            isPaid: false,
+        });
 
         const createdOrder = await newOrder.save();
 
         await User.findByIdAndUpdate(
-            user,
+            userId,
             {
                 $addToSet: { orders: createdOrder._id },
             },
