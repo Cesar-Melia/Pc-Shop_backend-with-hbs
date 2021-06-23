@@ -68,7 +68,8 @@ const editGet = (req, res, next) => {
 
 const editPut = async (req, res, next) => {
     try {
-        const { _id } = req.params;
+        console.log("req.body: ", req.body);
+        const { id } = req.params;
         const {
             name,
             price,
@@ -80,7 +81,6 @@ const editPut = async (req, res, next) => {
             ssd,
             hdd,
             stars,
-            image,
             comments,
             stock,
         } = req.body;
@@ -101,7 +101,9 @@ const editPut = async (req, res, next) => {
         if (comments) fieldsToUpdate.comments = comments;
         if (stock) fieldsToUpdate.stock = stock;
 
-        const updatedProduct = await Product.findByIdAndUpdate(_id, fieldsToUpdate, { new: true });
+        console.log("fields to update: ", fieldsToUpdate);
+
+        const updatedProduct = await Product.findByIdAndUpdate(id, fieldsToUpdate, { new: true });
 
         return res.status(200).json(updatedProduct);
     } catch (error) {

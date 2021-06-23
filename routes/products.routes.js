@@ -25,9 +25,7 @@ router.post("/create", [isAdmin, upload.single("image"), uploadToCloudinary], cr
 
 router.get("/edit", isAdmin, editGet);
 
-router.put("/edit", isAdmin, editPut);
-
-////////////////////////////////////////////////////// REVISAR ////////////
+router.put("/edit/:id", [isAdmin, upload.single("image"), uploadToCloudinary], editPut);
 
 router.put("/add-comment", addCommentPut);
 

@@ -145,6 +145,8 @@ const editPut = async (req, res, next) => {
     try {
         const { _id, user, products, total } = req.body;
 
+        console.log(req.body);
+
         const fieldsToUpdate = {};
         if (user) fieldsToUpdate.user = user;
         if (products) fieldsToUpdate.products = products;

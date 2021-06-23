@@ -1,16 +1,14 @@
 const multer = require("multer");
+// require("dotenv").config();
+
 const path = require("path");
 const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
 
-//CloudName:
-//API-key:
-//Secret:
-
 // cloudinary.config({
-//     cloud_name: "",
-//     api_key: "",
-//     api_secret: "",
+//     cloud_name: "diuuu0rat",
+//     api_key: "969224127198867",
+//     api_secret: "OYIR5R71A0qcJ_Fj5ywvhcQzhzU",
 // });
 
 const storage = multer.diskStorage({

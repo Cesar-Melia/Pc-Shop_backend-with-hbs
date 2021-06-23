@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+dotenv.config();
 const path = require("path"); //
 const hbs = require("hbs"); //
 const session = require("express-session");
@@ -14,8 +15,6 @@ const usersRoutes = require("./routes/users.routes");
 const ordersRoutes = require("./routes/orders.routes");
 const cartsRoutes = require("./routes/cart.routes");
 const db = require("./db");
-
-dotenv.config();
 
 db.connect();
 
@@ -37,13 +36,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, "public")));
 
 app.set("views", path.join(__dirname, "views")); //
 app.set("view engine", "hbs"); //
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     req.isAdmin = false;
