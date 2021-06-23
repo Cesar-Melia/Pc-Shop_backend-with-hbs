@@ -68,8 +68,8 @@ const editGet = (req, res, next) => {
 
 const editPut = async (req, res, next) => {
     try {
+        const { _id } = req.params;
         const {
-            _id,
             name,
             price,
             description,
@@ -96,7 +96,8 @@ const editPut = async (req, res, next) => {
         if (ssd) fieldsToUpdate.ssd = ssd;
         if (hdd) fieldsToUpdate.hdd = hdd;
         if (stars) fieldsToUpdate.stars = Number(stars);
-        if (image) fieldsToUpdate.image = image;
+        if (req.fileUrl) fieldsToUpdate.image = req.fileUrl;
+        //if (image) fieldsToUpdate.image = image;
         if (comments) fieldsToUpdate.comments = comments;
         if (stock) fieldsToUpdate.stock = stock;
 
