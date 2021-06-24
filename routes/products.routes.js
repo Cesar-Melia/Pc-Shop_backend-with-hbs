@@ -1,38 +1,37 @@
-const express = require("express");
+const express = require('express');
 const {
-    productsGet,
-    shopGet,
-    createGet,
-    createPost,
-    editPut,
-    editGet,
-    addCommentPut,
-    deleteGet,
-    deleteProduct,
-    productIdGet,
-} = require("../controllers/products.controller");
+  productsGet,
+  shopGet,
+  createGet,
+  createPost,
+  editPut,
+  editGet,
+  addCommentPut,
+  deleteCommentPut,
+  deleteGet,
+  deleteProduct,
+  productIdGet,
+} = require('../controllers/products.controller');
 const router = express.Router();
-const { upload, uploadToCloudinary } = require("../middlewares/file.middleware");
-const { isAdmin } = require("../middlewares/auth.middleware");
+const { upload, uploadToCloudinary } = require('../middlewares/file.middleware');
+const { isAdmin, isAuth } = require('../middlewares/auth.middleware');
 
-router.get("/", isAdmin, productsGet);
+router.get('/', isAdmin, productsGet);
 
-router.get("/shop", shopGet);
+router.get('/shop', shopGet);
 
-router.get("/create", isAdmin, createGet);
+router.get('/create', isAdmin, createGet);
 
-router.post("/create", [isAdmin, upload.single("image"), uploadToCloudinary], createPost);
+router.post('/create', [isAdmin, upload.single('image'), uploadToCloudinary], createPost);
 
-router.get("/edit", isAdmin, editGet);
+router.get('/edit', isAdmin, editGet);
 
-router.put("/edit/:id", [isAdmin, upload.single("image"), uploadToCloudinary], editPut);
+router.put('/edit/:id', [isAdmin, upload.single('image'), uploadToCloudinary], editPut);
 
-router.put("/add-comment", addCommentPut);
+router.get('/delete', isAdmin, deleteGet);
 
-router.get("/delete", isAdmin, deleteGet);
+router.delete('/:_id', isAdmin, deleteProduct);
 
-router.delete("/:_id", isAdmin, deleteProduct);
-
-router.get("/:id", productIdGet);
+router.get('/:id', productIdGet);
 
 module.exports = router;
