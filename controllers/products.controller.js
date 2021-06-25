@@ -19,7 +19,7 @@ const shopGet = async (req, res, next) => {
     req.user ? (user = req.user._id) : (user = 'guest');
 
     return res.status(200).render('shop', {
-      user,
+      user: req.user,
       products,
       isAdmin: req.isAdmin,
     });
